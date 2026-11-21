@@ -7,5 +7,9 @@ if (length < 1 || length > 280) {
   throw new Error(`entry must be 1-280 Unicode code points, got ${length}`);
 }
 
+if (text.includes("\n") || !text.endsWith(".")) {
+  throw new Error("entry must be a single paragraph ending with a period");
+}
+
 mkdirSync("/output", { recursive: true });
 writeFileSync("/output/entry.txt", text, "utf8");
